@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily OTP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(196, 127, 0);
+            color: #212529;
+        }
+        .otp-container {
+            padding: 2rem;
+            border-radius: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .otp {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #0d6efd;
+            margin: 1rem 0;
+        }
+        .btn-copy {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background-color: #0d6efd;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-copy:hover {
+            background-color: #0b5ed7;
+        }
+        .toast {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background-color: #0d6efd;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <h2>🔑 Your Daily OTP</h2>
+        <div class="otp" id="otp"><%=otp%></div>
+        <button class="btn btn-copy" onclick="copyToClipboard()">Copy OTP</button>
+    </div>
+
+    <div id="toast" class="toast">✅ OTP copied to clipboard!</div>
+
+    <script>
+        function copyToClipboard() {
+            const otp = document.getElementById('otp').textContent;
+            navigator.clipboard.writeText(otp)
+                .then(() => showToast())
+                .catch(err => alert('❌ Failed to copy OTP'));
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
