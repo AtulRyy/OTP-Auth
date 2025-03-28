@@ -1,14 +1,19 @@
 const crypto=require('crypto')
 
 function generateDailyOtp(){
+
     const now = new Date();
 
-    // Offset to IST (UTC + 5:30)
-    const istOffsetMs = 5.5 * 60 * 60 * 1000; // 5 hours 30 mins in milliseconds
-    const istTime = new Date(now.getTime() + istOffsetMs);
-
-    // Format IST date to "YYYY-MM-DD"
-    const date = istTime.toISOString().slice(0, 10);
+    // Convert to IST timezone
+    const istTime = now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    
+    // Convert to Date object
+    const istDate = new Date(istTime);
+    
+    // Extract YYYY-MM-DD
+    const date = istDate.toISOString().split("T")[0];
+    
+    console.log(date);
    
     const hash = crypto.createHash('sha256').update(date).digest('hex');
     // console.log(hash);
@@ -16,6 +21,7 @@ function generateDailyOtp(){
 
      const otp = numbersOnly.slice(0, 4).padEnd(4, '0');
     // console.log(otp);
+    console.log(otp);
     
     return otp;
 }
