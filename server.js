@@ -1,6 +1,7 @@
 const express=require('express')
 const dotenv=require('dotenv').config()
 const path=require('path')
+const generateOtp=require('./controllers/generateOtp')
 
 const app=express()
 
@@ -23,7 +24,19 @@ app.get('/', (req, res) => {
     res.send('✅ Server is running smoothly!');
 });
 
+app.post('/verify-otp', (req, res) => {
+    const { otp } = req.body;
+const todaysOtp=generateOtp();
+    if (!otp) {
+        return res.status(400).json({ success: false, message: "OTP is required" });
+    }
 
+    if (otp === todaysOtp) {
+        return res.status(200).json({ success: true, message: "OTP verified successfully!" });
+    } else {
+        return res.status(401).json({ success: false, message: "Invalid OTP!" });
+    }
+});
 
 
 
