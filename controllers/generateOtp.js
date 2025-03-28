@@ -1,6 +1,7 @@
 const crypto=require('crypto')
 
 function generateDailyOtp(){
+    const now = new Date();
     const istOffset = 19800 * 1000; // 5 hours 30 minutes in milliseconds
     const istTime = new Date(now.getTime() + istOffset);
 
