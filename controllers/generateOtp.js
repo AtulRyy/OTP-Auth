@@ -2,10 +2,12 @@ const crypto=require('crypto')
 
 function generateDailyOtp(){
     const now = new Date();
-    const istOffset = 19800 * 1000; // 5 hours 30 minutes in milliseconds
-    const istTime = new Date(now.getTime() + istOffset);
 
-    // Format to "YYYY-MM-DD"
+    // Offset to IST (UTC + 5:30)
+    const istOffsetMs = 5.5 * 60 * 60 * 1000; // 5 hours 30 mins in milliseconds
+    const istTime = new Date(now.getTime() + istOffsetMs);
+
+    // Format IST date to "YYYY-MM-DD"
     const date = istTime.toISOString().slice(0, 10);
    
     const hash = crypto.createHash('sha256').update(date).digest('hex');
