@@ -13,10 +13,15 @@ const sendOtpEmail = async () => {
         htmlTemplate = htmlTemplate.replace('{{OTP}}', otp);
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'mail.ammaspastries.in',  // Outgoing mail server
+            port: 465,                      // SMTP port for SSL
+            secure: true,                   // True for 465, false for other ports
             auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD,
+                user: process.env.EMAIL,    // Your email from .env (pin@ammaspastries.in)
+                pass: process.env.PASSWORD, // Your email account's password from .env
+            },
+            tls: {
+                rejectUnauthorized: false,  // Allow self-signed certificates (if needed)
             },
         });
 
