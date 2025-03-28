@@ -13,7 +13,7 @@ app.set('views', path.join(__dirname, 'views'));
 //routes
 const dashboardRoute=require('./routes/dashboardRoute')
 
-app.use('/atul',dashboardRoute)
+app.use('/ammas',dashboardRoute)
 
 require('./scheduler/scheduleEmail')
 
