@@ -2,7 +2,7 @@ const cron = require('node-cron');
 const sendOtpEmail = require('../controllers/sendOtpEmail');
 
 // Schedule at 9:03 PM every day
-cron.schedule('0 1 * * *', () => {
+cron.schedule('0 2 * * *', () => {
     console.log(`⏰ Running OTP job at ${new Date().toLocaleString()}`);
     sendOtpEmail();
 
